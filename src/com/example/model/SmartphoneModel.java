@@ -2,11 +2,10 @@ package com.example.model;
 
 /**
  *
- * @author Prithivi Maharjan
- * LMU ID: 15043736
+ * @author Prithivi Maharjan LMU ID: 15043736
  */
-
 public class SmartphoneModel {
+
     private String modelCode;
     private String name;
     private double displaySize;
@@ -23,7 +22,6 @@ public class SmartphoneModel {
         this.memory = memory;
         this.ram = ram;
     }
-
 
     // Getter and setter methods
     public String getModelCode() {

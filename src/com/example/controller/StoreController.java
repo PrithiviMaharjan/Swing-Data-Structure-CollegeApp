@@ -1,4 +1,3 @@
-
 package com.example.controller;
 
 import java.util.ArrayList;
@@ -7,10 +6,11 @@ import com.example.model.SmartphoneModel;
 
 /**
  *
- * @author Prithivi
+ * @author Prithivi Maharjan LMU ID: 15043736
  */
 public class StoreController {
-     // Method to add new mobile information to the system
+    // Method to add new mobile information to the system
+
     public static void addNewProduct(ArrayList<SmartphoneModel> smartphoneModel) {
         Scanner scanner = new Scanner(System.in);
 
@@ -141,5 +141,5 @@ public class StoreController {
         // Display a message if the smartphone is not found
         System.out.println("Smartphone with model code " + modelCode + " not found.");
     }
-   
+
 }

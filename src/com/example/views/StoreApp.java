@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 /**
  *
- * @author Prithivi
+ * @author Prithivi Maharjan LMU ID: 15043736
  */
 public class StoreApp {
 
     private static ArrayList<SmartphoneModel> smartphoneModelList = new ArrayList<>();
-        
+
     public static void main(String[] args) {
         int choice;
         Scanner scanner = new Scanner(System.in);
@@ -28,12 +28,18 @@ public class StoreApp {
             choice = scanner.nextInt();
 
             switch (choice) {
-                case 1 -> StoreController.addNewProduct(smartphoneModelList);
-                case 2 -> StoreController.deleteProduct(smartphoneModelList);
-                case 3 -> StoreController.updateProduct(smartphoneModelList);
-                case 4 -> StoreController.getSmartphoneInfo(smartphoneModelList);
-                case 5 -> System.out.println("Exiting the program. Thank you!");
-                default -> System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                case 1 ->
+                    StoreController.addNewProduct(smartphoneModelList);
+                case 2 ->
+                    StoreController.deleteProduct(smartphoneModelList);
+                case 3 ->
+                    StoreController.updateProduct(smartphoneModelList);
+                case 4 ->
+                    StoreController.getSmartphoneInfo(smartphoneModelList);
+                case 5 ->
+                    System.out.println("Exiting the program. Thank you!");
+                default ->
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
 
         } while (choice != 5);
