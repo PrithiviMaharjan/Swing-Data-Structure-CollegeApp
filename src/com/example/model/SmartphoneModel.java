@@ -6,12 +6,9 @@ package com.example.model;
  */
 public class SmartphoneModel {
 
-    private String modelCode;
-    private String name;
-    private double displaySize;
-    private double price;
-    private int memory;
-    private int ram;
+    private String modelCode, name;
+    private double displaySize, price;
+    private int memory, ram;
 
     // Constructor to initialize variables
     public SmartphoneModel(String modelCode, String name, double displaySize, double price, int memory, int ram) {
