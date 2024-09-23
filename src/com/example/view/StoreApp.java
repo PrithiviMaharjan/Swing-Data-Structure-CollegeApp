@@ -1,4 +1,4 @@
-package com.example.views;
+package com.example.view;
 
 import com.example.controller.StoreController;
 import com.example.model.SmartphoneModel;
@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class StoreApp {
 
-    private static ArrayList<SmartphoneModel> smartphoneModelList = new ArrayList<>();
+    private static final ArrayList<SmartphoneModel> smartphoneModelList = new ArrayList<>();
 
     public static void main(String[] args) {
         int choice;
