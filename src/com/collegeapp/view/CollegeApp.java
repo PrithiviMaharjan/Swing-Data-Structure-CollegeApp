@@ -1,19 +1,28 @@
 package com.collegeapp.view;
 
+import com.collegeapp.model.StudentModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Prithivi
  */
 public class CollegeApp extends javax.swing.JFrame {
 
-    
-    
+    private final ArrayList<StudentModel> studentList;
+    private DefaultTableModel defaultTableModel;
+
     /**
      * Creates new form CollegeApp
      */
     public CollegeApp() {
         initComponents();
-
+        studentList = new ArrayList();
+        addNewInitialStudent(new StudentModel(12341, "Binit Lal Shrestha",
+                "Bachelors in Computing", "9878765754", (short) 20));
+        addNewInitialStudent(new StudentModel(12342, "Dolma Lama",
+                "Bachelors in Networking", "9878765755", (short) 21));
     }
 
     /**
@@ -95,10 +104,7 @@ public class CollegeApp extends javax.swing.JFrame {
         tblStudent.setBackground(new java.awt.Color(234, 192, 32));
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "LMU ID", "Full Name", "Program", "Contact", "Age"
@@ -221,8 +227,18 @@ public class CollegeApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void addNewInitialStudent(StudentModel student) {
+        studentList.add(student);
+        addDataToTable(student);
+    }
+
+    private void addDataToTable(StudentModel student) {
+        defaultTableModel = (DefaultTableModel) tblStudent.getModel();
+        defaultTableModel.addRow(new Object[]{student.getLmuId(),
+            student.getName(), student.getProgram(), student.getContact(),
+            student.getAge()});
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -251,10 +267,8 @@ public class CollegeApp extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CollegeApp().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new CollegeApp().setVisible(true);
         });
     }
 
