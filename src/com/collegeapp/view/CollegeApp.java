@@ -4,6 +4,7 @@ import com.collegeapp.model.StudentModel;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author Prithivi
@@ -12,17 +13,17 @@ public class CollegeApp extends javax.swing.JFrame {
 
     private final ArrayList<StudentModel> studentList;
     private DefaultTableModel defaultTableModel;
-
     /**
      * Creates new form CollegeApp
      */
     public CollegeApp() {
         initComponents();
-        studentList = new ArrayList();
-        addNewInitialStudent(new StudentModel(12341, "Binit Lal Shrestha",
-                "Bachelors in Computing", "9878765754", (short) 20));
-        addNewInitialStudent(new StudentModel(12342, "Dolma Lama",
-                "Bachelors in Networking", "9878765755", (short) 21));
+        studentList = new ArrayList<>();
+        addStudentDataToTable(new StudentModel(
+                 1234, "Samir Sen", "IT", "9878657473", (short) 20));
+        addStudentDataToTable(new StudentModel(
+                 12345, "Samir Sen2", "IT", "9878657474", (short) 20));
+        
     }
 
     /**
@@ -41,7 +42,7 @@ public class CollegeApp extends javax.swing.JFrame {
         tabPaneMain = new javax.swing.JTabbedPane();
         pnlHome = new javax.swing.JPanel();
         pnlStudentList = new javax.swing.JPanel();
-        scrlPaneTblStudent = new javax.swing.JScrollPane();
+        spTblStudent = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
         lblTblStudentTitle = new javax.swing.JLabel();
         pnlAdminControl = new javax.swing.JPanel();
@@ -64,17 +65,17 @@ public class CollegeApp extends javax.swing.JFrame {
             pnlMainBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainBarLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(lblMainBarLogo)
+                .addComponent(lblMainBarLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblMainBarSlogan, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMainBarLayout.setVerticalGroup(
             pnlMainBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainBarLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainBarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlMainBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMainBarLogo)
+                .addGroup(pnlMainBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblMainBarLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMainBarSlogan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -123,7 +124,7 @@ public class CollegeApp extends javax.swing.JFrame {
         tblStudent.setSelectionForeground(new java.awt.Color(234, 192, 32));
         tblStudent.setShowGrid(true);
         tblStudent.getTableHeader().setReorderingAllowed(false);
-        scrlPaneTblStudent.setViewportView(tblStudent);
+        spTblStudent.setViewportView(tblStudent);
         if (tblStudent.getColumnModel().getColumnCount() > 0) {
             tblStudent.getColumnModel().getColumn(0).setResizable(false);
             tblStudent.getColumnModel().getColumn(1).setResizable(false);
@@ -136,7 +137,7 @@ public class CollegeApp extends javax.swing.JFrame {
         lblTblStudentTitle.setBackground(new java.awt.Color(234, 192, 32));
         lblTblStudentTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTblStudentTitle.setForeground(new java.awt.Color(234, 192, 32));
-        lblTblStudentTitle.setText("Student Table");
+        lblTblStudentTitle.setText("Student Information");
         lblTblStudentTitle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(234, 192, 32)));
 
         javax.swing.GroupLayout pnlStudentListLayout = new javax.swing.GroupLayout(pnlStudentList);
@@ -147,7 +148,7 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTblStudentTitle)
-                    .addComponent(scrlPaneTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         pnlStudentListLayout.setVerticalGroup(
@@ -156,7 +157,7 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(lblTblStudentTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrlPaneTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -227,18 +228,16 @@ public class CollegeApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addNewInitialStudent(StudentModel student) {
-        studentList.add(student);
-        addDataToTable(student);
-    }
 
-    private void addDataToTable(StudentModel student) {
-        defaultTableModel = (DefaultTableModel) tblStudent.getModel();
-        defaultTableModel.addRow(new Object[]{student.getLmuId(),
-            student.getName(), student.getProgram(), student.getContact(),
-            student.getAge()});
-    }
-
+     private void addStudentDataToTable(StudentModel student){
+         studentList.add(student);
+         defaultTableModel = (DefaultTableModel) tblStudent.getModel();
+         defaultTableModel.addRow(new Object[]{student.getLmuId(),
+         student.getName(), student.getProgram(), student.getContact(),
+         student.getAge()
+         });
+     }
+    
     /**
      * @param args the command line arguments
      */
@@ -282,7 +281,7 @@ public class CollegeApp extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainBar;
     private javax.swing.JPanel pnlStudentList;
-    private javax.swing.JScrollPane scrlPaneTblStudent;
+    private javax.swing.JScrollPane spTblStudent;
     private javax.swing.JTabbedPane tabPaneMain;
     private javax.swing.JTable tblStudent;
     // End of variables declaration//GEN-END:variables

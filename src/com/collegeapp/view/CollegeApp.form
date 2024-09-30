@@ -75,7 +75,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="lblMainBarLogo" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMainBarLogo" min="-2" pref="123" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblMainBarSlogan" min="-2" pref="478" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -84,10 +84,10 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblMainBarLogo" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblMainBarLogo" max="32767" attributes="0"/>
                           <Component id="lblMainBarSlogan" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -187,7 +187,7 @@
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTblStudentTitle" min="-2" max="-2" attributes="0"/>
-                              <Component id="scrlPaneTblStudent" min="-2" pref="911" max="-2" attributes="0"/>
+                              <Component id="spTblStudent" min="-2" pref="911" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="41" max="32767" attributes="0"/>
                       </Group>
@@ -199,14 +199,14 @@
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Component id="lblTblStudentTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="scrlPaneTblStudent" min="-2" pref="264" max="-2" attributes="0"/>
+                          <Component id="spTblStudent" min="-2" pref="264" max="-2" attributes="0"/>
                           <EmptySpace pref="48" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="scrlPaneTblStudent">
+                <Container class="javax.swing.JScrollPane" name="spTblStudent">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
@@ -284,7 +284,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="20" green="c0" red="ea" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Student Table"/>
+                    <Property name="text" type="java.lang.String" value="Student Information"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder>
