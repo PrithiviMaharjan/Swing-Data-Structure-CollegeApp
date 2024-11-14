@@ -2,8 +2,7 @@ package com.collegeapp.model;
 
 /**
  *
- * @author Prithivi ----
- * -----
+ * @author Prithivi
  */
 public class StudentModel {
     private int lmuId;
@@ -12,8 +11,9 @@ public class StudentModel {
     private String contact;
     private short age;
 
-    public StudentModel(){}
-    
+    public StudentModel() {
+    }
+
     public StudentModel(int lmuId, String name, String program, String contact, short age) {
         this.lmuId = lmuId;
         this.name = name;
@@ -21,7 +21,7 @@ public class StudentModel {
         this.contact = contact;
         this.age = age;
     }
-
+    
     public int getLmuId() {
         return lmuId;
     }
@@ -60,7 +60,5 @@ public class StudentModel {
 
     public void setAge(short age) {
         this.age = age;
-    }
-    
-    
+    }    
 }

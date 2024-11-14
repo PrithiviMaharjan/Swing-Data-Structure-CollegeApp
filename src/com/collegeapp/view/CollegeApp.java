@@ -4,7 +4,6 @@ import com.collegeapp.model.StudentModel;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Prithivi
@@ -12,18 +11,18 @@ import javax.swing.table.DefaultTableModel;
 public class CollegeApp extends javax.swing.JFrame {
 
     private final ArrayList<StudentModel> studentList;
-    private DefaultTableModel defaultTableModel;
+
     /**
      * Creates new form CollegeApp
      */
     public CollegeApp() {
         initComponents();
-        studentList = new ArrayList<>();
-        addStudentDataToTable(new StudentModel(
-                 1234, "Samir Sen", "IT", "9878657473", (short) 20));
-        addStudentDataToTable(new StudentModel(
-                 12345, "Samir Sen2", "IT", "9878657474", (short) 20));
-        
+        studentList = new ArrayList();
+        loadScreens();
+        addStudentData(new StudentModel(123, "Suman",
+                "BIT. Computing", "9876", (short) 21));
+        addStudentData(new StudentModel(1234, "Radha",
+                "BIT. Computing", "98736", (short) 21));
     }
 
     /**
@@ -47,10 +46,18 @@ public class CollegeApp extends javax.swing.JFrame {
         lblTblStudentTitle = new javax.swing.JLabel();
         pnlAdminControl = new javax.swing.JPanel();
         pnlAboutUs = new javax.swing.JPanel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pnlLogin = new javax.swing.JPanel();
+        pnlLoginForm = new javax.swing.JPanel();
+        txtFldUsername = new javax.swing.JTextField();
+        txtFldPassword = new javax.swing.JTextField();
+        lblLoginTitle = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+        btnForgotPassword = new javax.swing.JButton();
+        lblLoginLogo = new javax.swing.JLabel();
 
         pnlMain.setBackground(new java.awt.Color(0, 0, 0));
+        pnlMain.setMaximumSize(new java.awt.Dimension(1118, 502));
+        pnlMain.setMinimumSize(new java.awt.Dimension(1118, 502));
 
         pnlMainBar.setBackground(new java.awt.Color(234, 192, 32));
 
@@ -91,7 +98,7 @@ public class CollegeApp extends javax.swing.JFrame {
         pnlHome.setLayout(pnlHomeLayout);
         pnlHomeLayout.setHorizontalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 1108, Short.MAX_VALUE)
         );
         pnlHomeLayout.setVerticalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,8 +155,8 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTblStudentTitle)
-                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         pnlStudentListLayout.setVerticalGroup(
             pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +177,7 @@ public class CollegeApp extends javax.swing.JFrame {
         pnlAdminControl.setLayout(pnlAdminControlLayout);
         pnlAdminControlLayout.setHorizontalGroup(
             pnlAdminControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 1108, Short.MAX_VALUE)
         );
         pnlAdminControlLayout.setVerticalGroup(
             pnlAdminControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +193,7 @@ public class CollegeApp extends javax.swing.JFrame {
         pnlAboutUs.setLayout(pnlAboutUsLayout);
         pnlAboutUsLayout.setHorizontalGroup(
             pnlAboutUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 1108, Short.MAX_VALUE)
         );
         pnlAboutUsLayout.setVerticalGroup(
             pnlAboutUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,42 +209,170 @@ public class CollegeApp extends javax.swing.JFrame {
             .addComponent(pnlMainBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabPaneMain)
-                .addContainerGap())
+                .addComponent(tabPaneMain))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(pnlMainBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tabPaneMain)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabPaneMain))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlLogin.setBackground(new java.awt.Color(234, 192, 32));
+        pnlLogin.setMaximumSize(new java.awt.Dimension(1118, 502));
+        pnlLogin.setMinimumSize(new java.awt.Dimension(1118, 502));
+        pnlLogin.setPreferredSize(new java.awt.Dimension(1118, 502));
+
+        pnlLoginForm.setBackground(new java.awt.Color(0, 0, 0));
+
+        txtFldUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(234, 192, 32))); // NOI18N
+
+        txtFldPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(234, 192, 32))); // NOI18N
+
+        lblLoginTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblLoginTitle.setForeground(new java.awt.Color(234, 192, 32));
+        lblLoginTitle.setText("Login To Your System");
+
+        btnLogin.setBackground(new java.awt.Color(234, 192, 32));
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnForgotPassword.setBackground(new java.awt.Color(0, 0, 0));
+        btnForgotPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnForgotPassword.setForeground(new java.awt.Color(234, 192, 32));
+        btnForgotPassword.setText("Forgot your password?");
+
+        javax.swing.GroupLayout pnlLoginFormLayout = new javax.swing.GroupLayout(pnlLoginForm);
+        pnlLoginForm.setLayout(pnlLoginFormLayout);
+        pnlLoginFormLayout.setHorizontalGroup(
+            pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginFormLayout.createSequentialGroup()
+                .addGroup(pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlLoginFormLayout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(lblLoginTitle))
+                            .addGroup(pnlLoginFormLayout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addGroup(pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFldPassword)
+                                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))))
+                    .addGroup(pnlLoginFormLayout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(btnForgotPassword)))
+                .addContainerGap(241, Short.MAX_VALUE))
+        );
+        pnlLoginFormLayout.setVerticalGroup(
+            pnlLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginFormLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(lblLoginTitle)
+                .addGap(37, 37, 37)
+                .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnForgotPassword)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+
+        lblLoginLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/collegeapp/resources/logo_big.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
+        pnlLogin.setLayout(pnlLoginLayout);
+        pnlLoginLayout.setHorizontalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addComponent(pnlLoginForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblLoginLogo)
+                .addGap(15, 15, 15))
+        );
+        pnlLoginLayout.setVerticalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLoginLogo)
+                .addGap(130, 130, 130))
+            .addComponent(pnlLoginForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1130, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadScreens() {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1118, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 502, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-     private void addStudentDataToTable(StudentModel student){
-         studentList.add(student);
-         defaultTableModel = (DefaultTableModel) tblStudent.getModel();
-         defaultTableModel.addRow(new Object[]{student.getLmuId(),
-         student.getName(), student.getProgram(), student.getContact(),
-         student.getAge()
-         });
-     }
-    
+        pnlMain.setVisible(false);
+    }
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        pnlMain.setVisible(true);
+        pnlLogin.setVerifyInputWhenFocusTarget(false);
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void addStudentData(StudentModel student) {
+        studentList.add(student);
+        //Table add
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tblStudent.getModel();
+        defaultTableModel.addRow(new Object[]{
+            student.getLmuId(), student.getName(), student.getProgram(),
+            student.getContact(), student.getAge()
+        });
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -272,17 +407,25 @@ public class CollegeApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnForgotPassword;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel lblLoginLogo;
+    private javax.swing.JLabel lblLoginTitle;
     private javax.swing.JLabel lblMainBarLogo;
     private javax.swing.JLabel lblMainBarSlogan;
     private javax.swing.JLabel lblTblStudentTitle;
     private javax.swing.JPanel pnlAboutUs;
     private javax.swing.JPanel pnlAdminControl;
     private javax.swing.JPanel pnlHome;
+    private javax.swing.JPanel pnlLogin;
+    private javax.swing.JPanel pnlLoginForm;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainBar;
     private javax.swing.JPanel pnlStudentList;
     private javax.swing.JScrollPane spTblStudent;
     private javax.swing.JTabbedPane tabPaneMain;
     private javax.swing.JTable tblStudent;
+    private javax.swing.JTextField txtFldPassword;
+    private javax.swing.JTextField txtFldUsername;
     // End of variables declaration//GEN-END:variables
 }
