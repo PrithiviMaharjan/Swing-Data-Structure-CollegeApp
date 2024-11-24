@@ -9,6 +9,10 @@ public class ValidationUtil {
     private static final Pattern PROGRAM_PATTERN = Pattern.compile("^(Computing|Multimedia|Networking)$");
     private static final Pattern CONTACT_PATTERN = Pattern.compile("^98\\d{8}$");
     
+    private ValidationUtil() {
+        // Utility class should not be instantiated.
+    }
+
     /**
      * Validates if a string is null or empty.
      *
