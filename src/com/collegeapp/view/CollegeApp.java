@@ -1,7 +1,7 @@
 package com.collegeapp.view;
 
-import com.collegeapp.controller.ValidationUtil;
 import com.collegeapp.model.StudentModel;
+import com.collegeapp.util.ValidationUtil;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -14,14 +14,14 @@ public class CollegeApp extends javax.swing.JFrame {
 
     private List<StudentModel> studentList;
     private java.awt.CardLayout cardLayout;
-    private final ValidationUtil validations;
-    
+    private final ValidationUtil validationUtil;
+
     /**
      * Creates new form CollegeApp
      */
     public CollegeApp() {
         initComponents();
-        validations = new ValidationUtil();
+        validationUtil = new ValidationUtil();
         initializeLayout(); // Set up CardLayout and add screens
         initializeData(); // Initialize student data and table
         startProgress(); // Show loading screen and initiate progress       
@@ -429,8 +429,12 @@ public class CollegeApp extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// Method to set up the CardLayout and add panels
 
+    /**
+     * Initializes the layout of the application by setting up the CardLayout
+     * and adding panels for different screens. Each panel is uniquely
+     * identified for easy navigation between screens.
+     */
     private void initializeLayout() {
         cardLayout = new java.awt.CardLayout();
         getContentPane().setLayout(cardLayout);
@@ -444,22 +448,30 @@ public class CollegeApp extends javax.swing.JFrame {
         loadScreen("LoadingScreen");
     }
 
-    // Method to initialize data, including student list and table
+    /**
+     * Initializes the application's data, including the student list and table.
+     * Populates the student list with sample data for demonstration purposes.
+     */
     private void initializeData() {
-        studentList = new LinkedList();
-        
+        studentList = new LinkedList<>();
+
+        // Registering sample students
         registerStudent(new StudentModel(123, "Suman", "BIT. Computing", "9876", (short) 21));
         registerStudent(new StudentModel(1234, "Radha", "BIT. Computing", "98736", (short) 21));
     }
-    
-    // Method to simulate loading progress
+
+    /**
+     * Simulates the loading progress using a SwingWorker thread. Updates a
+     * progress bar incrementally and switches to the login screen upon
+     * completion.
+     */
     private void startProgress() {
         javax.swing.SwingWorker<Void, Integer> worker = new javax.swing.SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
                 for (int i = 0; i <= 100; i++) {
                     Thread.sleep(30); // Simulated delay for progress bar
-                    publish(i);
+                    publish(i); // Publish progress
                 }
                 return null;
             }
@@ -475,19 +487,19 @@ public class CollegeApp extends javax.swing.JFrame {
                 loadScreen("LoginScreen"); // Switch to login screen
             }
         };
-        worker.execute();
+        worker.execute(); // Start the worker thread
     }
 
     // Method to add student data and populate the table
     private void registerStudent(StudentModel student) {
         studentList.add(student);
         DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
-        model.addRow(new Object[]{  
+        model.addRow(new Object[]{
             student.getLmuId(), student.getName(), student.getProgram(),
             student.getContact(), student.getAge()
         });
     }
-    
+
 //    private Boolean updateStudent(StudentModel student){
 //        
 //    }
@@ -507,12 +519,22 @@ public class CollegeApp extends javax.swing.JFrame {
 //    private void loadStudentListToTable(){
 //        
 //    }
-    
-    // Method to switch screens
+    /**
+     * Switches the application screen to the specified screen name.
+     *
+     * @param screenName The name of the screen to display.
+     */
     private void loadScreen(String screenName) {
         cardLayout.show(getContentPane(), screenName);
     }
 
+    /**
+     * Handles the login button action. Validates the username and password
+     * input and navigates to the main screen if credentials are correct.
+     * Displays appropriate error messages otherwise.
+     *
+     * @param evt The action event triggered by the login button.
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // Get the username and password input
         String username = txtFldLoginUsername.getText();
@@ -531,6 +553,12 @@ public class CollegeApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Handles the logout button action. Clears the login fields and switches
+     * back to the login screen.
+     *
+     * @param evt The action event triggered by the logout button.
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         pwdFldLogin.setText("");
         txtFldLoginUsername.setText("");
