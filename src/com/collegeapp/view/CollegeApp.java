@@ -1,5 +1,6 @@
 package com.collegeapp.view;
 
+import com.collegeapp.controller.ValidationUtil;
 import com.collegeapp.model.StudentModel;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,15 +14,17 @@ public class CollegeApp extends javax.swing.JFrame {
 
     private List<StudentModel> studentList;
     private java.awt.CardLayout cardLayout;
-
+    private final ValidationUtil validations;
+    
     /**
      * Creates new form CollegeApp
      */
     public CollegeApp() {
         initComponents();
+        validations = new ValidationUtil();
         initializeLayout(); // Set up CardLayout and add screens
         initializeData(); // Initialize student data and table
-        startProgress(); // Show loading screen and initiate progress
+        startProgress(); // Show loading screen and initiate progress       
     }
 
     /**
@@ -49,6 +52,7 @@ public class CollegeApp extends javax.swing.JFrame {
         pnlLoginScreen = new javax.swing.JPanel();
         pnlLoginLeft = new javax.swing.JPanel();
         lblLoginLogo = new javax.swing.JLabel();
+        lblLoginSlogan = new javax.swing.JLabel();
         lblLoginTitle = new javax.swing.JLabel();
         txtFldLoginUsername = new javax.swing.JTextField();
         pwdFldLogin = new javax.swing.JPasswordField();
@@ -250,6 +254,10 @@ public class CollegeApp extends javax.swing.JFrame {
 
         lblLoginLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/collegeapp/resources/logo_big.png"))); // NOI18N
 
+        lblLoginSlogan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblLoginSlogan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLoginSlogan.setText("Empowering Your Academic Journey, One Login at a Time");
+
         javax.swing.GroupLayout pnlLoginLeftLayout = new javax.swing.GroupLayout(pnlLoginLeft);
         pnlLoginLeft.setLayout(pnlLoginLeftLayout);
         pnlLoginLeftLayout.setHorizontalGroup(
@@ -258,13 +266,19 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE)
                 .addComponent(lblLoginLogo)
                 .addGap(83, 83, 83))
+            .addGroup(pnlLoginLeftLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLoginSlogan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlLoginLeftLayout.setVerticalGroup(
             pnlLoginLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLeftLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(lblLoginLogo)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(lblLoginSlogan)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         lblLoginTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -427,12 +441,13 @@ public class CollegeApp extends javax.swing.JFrame {
         getContentPane().add(pnlMainScreen, "MainScreen");
 
         // Start with the loading screen
-        cardLayout.show(getContentPane(), "LoadingScreen");
+        loadScreen("LoadingScreen");
     }
 
     // Method to initialize data, including student list and table
     private void initializeData() {
         studentList = new LinkedList();
+        
         registerStudent(new StudentModel(123, "Suman", "BIT. Computing", "9876", (short) 21));
         registerStudent(new StudentModel(1234, "Radha", "BIT. Computing", "98736", (short) 21));
     }
@@ -467,12 +482,31 @@ public class CollegeApp extends javax.swing.JFrame {
     private void registerStudent(StudentModel student) {
         studentList.add(student);
         DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
-        model.addRow(new Object[]{
+        model.addRow(new Object[]{  
             student.getLmuId(), student.getName(), student.getProgram(),
             student.getContact(), student.getAge()
         });
     }
     
+//    private Boolean updateStudent(StudentModel student){
+//        
+//    }
+//    
+//    private Boolean deleteStudent(int lmuId){
+//        
+//    }
+//
+//    private StudentModel createStudentModel(......){
+//        
+//    }
+//    
+//    private void clearForm(){
+//        
+//    }
+//    
+//    private void loadStudentListToTable(){
+//        
+//    }
     
     // Method to switch screens
     private void loadScreen(String screenName) {
@@ -548,6 +582,7 @@ public class CollegeApp extends javax.swing.JFrame {
     private javax.swing.JLabel lblLoginError;
     private javax.swing.JLabel lblLoginForgotPwd;
     private javax.swing.JLabel lblLoginLogo;
+    private javax.swing.JLabel lblLoginSlogan;
     private javax.swing.JLabel lblLoginSubTitle;
     private javax.swing.JLabel lblLoginTitle;
     private javax.swing.JLabel lblMainBarLogo;
