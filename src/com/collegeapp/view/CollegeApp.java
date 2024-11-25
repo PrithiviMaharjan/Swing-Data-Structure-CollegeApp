@@ -47,7 +47,6 @@ public class CollegeApp extends javax.swing.JFrame {
         spTblStudent = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
         lblTblStudentTitle = new javax.swing.JLabel();
-        pnlAdminControl = new javax.swing.JPanel();
         pnlAboutUs = new javax.swing.JPanel();
         pnlLoginScreen = new javax.swing.JPanel();
         pnlLoginLeft = new javax.swing.JPanel();
@@ -176,9 +175,9 @@ public class CollegeApp extends javax.swing.JFrame {
             .addGroup(pnlStudentListLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTblStudentTitle)
-                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTblStudentTitle))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         pnlStudentListLayout.setVerticalGroup(
             pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,27 +185,11 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(lblTblStudentTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         tabPaneMain.addTab("Student List", pnlStudentList);
-
-        pnlAdminControl.setBackground(new java.awt.Color(0, 0, 0));
-        pnlAdminControl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(234, 192, 32)));
-
-        javax.swing.GroupLayout pnlAdminControlLayout = new javax.swing.GroupLayout(pnlAdminControl);
-        pnlAdminControl.setLayout(pnlAdminControlLayout);
-        pnlAdminControlLayout.setHorizontalGroup(
-            pnlAdminControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlAdminControlLayout.setVerticalGroup(
-            pnlAdminControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        tabPaneMain.addTab("Admin Control", pnlAdminControl);
 
         pnlAboutUs.setBackground(new java.awt.Color(0, 0, 0));
         pnlAboutUs.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(234, 192, 32)));
@@ -231,7 +214,7 @@ public class CollegeApp extends javax.swing.JFrame {
             .addComponent(pnlMainBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlMainScreenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1118, Short.MAX_VALUE)
+                .addComponent(tabPaneMain)
                 .addContainerGap())
         );
         pnlMainScreenLayout.setVerticalGroup(
@@ -239,7 +222,7 @@ public class CollegeApp extends javax.swing.JFrame {
             .addGroup(pnlMainScreenLayout.createSequentialGroup()
                 .addComponent(pnlMainBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
+                .addComponent(tabPaneMain))
         );
 
         pnlLoginScreen.setBackground(new java.awt.Color(0, 0, 0));
@@ -329,7 +312,7 @@ public class CollegeApp extends javax.swing.JFrame {
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 99, Short.MAX_VALUE))
                     .addGroup(pnlLoginScreenLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, 0)
                         .addGroup(pnlLoginScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlLoginScreenLayout.createSequentialGroup()
                                 .addComponent(lblLoginTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -618,7 +601,6 @@ public class CollegeApp extends javax.swing.JFrame {
     private javax.swing.JLabel lblTblStudentTitle;
     private javax.swing.JProgressBar pgBarSplashScreen;
     private javax.swing.JPanel pnlAboutUs;
-    private javax.swing.JPanel pnlAdminControl;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlLoadingScreen;
     private javax.swing.JPanel pnlLoginLeft;

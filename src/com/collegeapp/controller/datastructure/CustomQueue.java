@@ -4,19 +4,21 @@ import com.collegeapp.model.StudentModel;
 import java.util.LinkedList;
 
 /**
- * <b>Custom implementation of a queue data structure for managing StudentModel objects.
- * This queue is implemented using a LinkedList and supports basic operations 
- * like enqueue, dequeue, peek, and size checks</b>.
- * 
- * <p>Features include:</p>
+ * <b>Custom implementation of a queue data structure for managing StudentModel
+ * objects. This queue is implemented using a LinkedList and supports basic
+ * operations like enqueue, dequeue, peek, and size checks</b>.
+ *
+ * <p>
+ * Features include:</p>
  * <ul>
- *   <li>Capacity limit for the queue.</li>
- *   <li>Ability to check if the queue is empty or full.</li>
+ * <li>Capacity limit for the queue.</li>
+ * <li>Ability to check if the queue is empty or full.</li>
  * </ul>
- * 
- * <p>Note: This implementation assumes that the queue operations are not 
- * accessed concurrently.</p>
- * 
+ *
+ * <p>
+ * Note: This implementation assumes that the queue operations are not accessed
+ * concurrently.</p>
+ *
  * @author Prithivi
  */
 public class CustomQueue {
@@ -41,26 +43,29 @@ public class CustomQueue {
     /**
      * Removes and returns the first element from the queue.
      *
-     * @return the first StudentModel in the queue, or null if the queue is empty.
+     * @return the first StudentModel in the queue, or null if the queue is
+     * empty.
      * @throws IllegalStateException if the queue is empty.
      */
     public StudentModel deQueue() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Cannot dequeue from an empty queue.");
+        try {
+            return vivaList.removeFirst();
+        } catch (Exception ex) {
+            throw new IllegalStateException("Cannot remove from empty queue."); // Indicates the queue is full.
         }
-        return vivaList.removeFirst();
+        
     }
 
     /**
      * Adds a new element to the end of the queue if it is not full.
      *
      * @param studentModel the StudentModel to be added to the queue.
-     * @return the current size of the queue after the operation
-     * , or -1 if the queue is full.
+     * @return the current size of the queue after the operation , or -1 if the
+     * queue is full.
      */
     public int enQueue(StudentModel studentModel) {
         if (isFull()) {
-            return -1; // Indicates the queue is full.
+            throw new IllegalStateException("Cannot peek into an empty queue."); // Indicates the queue is full.
         }
         vivaList.addLast(studentModel);
         return vivaList.size();
@@ -78,14 +83,16 @@ public class CustomQueue {
     /**
      * Retrieves, but does not remove, the first element of the queue.
      *
-     * @return the first StudentModel in the queue, or null if the queue is empty.
+     * @return the first StudentModel in the queue, or null if the queue is
+     * empty.
      * @throws IllegalStateException if the queue is empty.
      */
     public StudentModel peek() {
-        if (isEmpty()) {
+        try{
+            return vivaList.getFirst();
+        }catch (Exception ex) {
             throw new IllegalStateException("Cannot peek into an empty queue.");
         }
-        return vivaList.getFirst();
     }
 
     /**
