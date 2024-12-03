@@ -594,8 +594,8 @@ public class CollegeApp extends javax.swing.JFrame {
         studentList = new LinkedList<>();
 
         // Registering sample students
-        registerStudent(new StudentModel(123, "Suman", "BIT. Computing", "9876", (short) 21));
-        registerStudent(new StudentModel(1234, "Radha", "BIT. Computing", "98736", (short) 21));
+        registerStudent(new StudentModel(19057565, "Lekhnath Tandukar", "Multimedia", "9860898172", (short) 21));
+        registerStudent(new StudentModel(19057566, "Subin Chhetri", "BIT. Computing", "9818928272", (short) 20));
     }
 
     /**
@@ -684,6 +684,13 @@ public class CollegeApp extends javax.swing.JFrame {
         loadScreen("LoginScreen"); // Load the main screen
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Event handler for the Add button action. Validates input fields, creates
+     * a new student record if valid, and checks for duplicate LMU IDs before
+     * adding the record to the student list.
+     *
+     * @param evt the ActionEvent triggered by the Add button
+     */
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         boolean isValid = true;
 
@@ -752,6 +759,10 @@ public class CollegeApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * Populates the JTable with the current list of student records. Clears
+     * existing rows in the table model before adding new data.
+     */
     private void loadListToTable() {
         DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
 
@@ -768,6 +779,20 @@ public class CollegeApp extends javax.swing.JFrame {
         }));
     }
 
+    /**
+     * Validates a single input field based on specific criteria and updates its
+     * visual state.
+     *
+     * @param textField the JTextField to validate
+     * @param fieldName the name of the field for error display
+     * @param errorLbl the JLabel to show error messages
+     * @param errorMsg the error message to display for invalid input
+     * @param errorColor the color for error borders and text
+     * @param successColor the color for successful validation borders
+     * @param isValidFormat whether the input satisfies the field-specific
+     * validation criteria
+     * @return true if the field passes validation, false otherwise
+     */
     private boolean validateField(JTextField textField, String fieldName, JLabel errorLbl, String errorMsg, Color errorColor, Color successColor, boolean isValidFormat) {
         if (ValidationUtil.isNullOrEmpty(textField.getText())) {
             textField.setBorder(createTitledBorder(errorColor, fieldName));
@@ -786,6 +811,13 @@ public class CollegeApp extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Creates a custom TitledBorder with specified color and title.
+     *
+     * @param color the color for the border and title
+     * @param title the title text for the border
+     * @return a TitledBorder instance
+     */
     private javax.swing.border.TitledBorder createTitledBorder(Color color, String title) {
         return javax.swing.BorderFactory.createTitledBorder(
                 javax.swing.BorderFactory.createLineBorder(color, 2),
@@ -797,10 +829,22 @@ public class CollegeApp extends javax.swing.JFrame {
         );
     }
 
+    /**
+     * Displays a message dialog box with the given message, title, and type.
+     *
+     * @param message the message to display
+     * @param title the title of the dialog box
+     * @param messageType the type of message (e.g., information, warning, or
+     * error)
+     */
     private void showDialogBox(String message, String title, int messageType) {
         JOptionPane.showMessageDialog(this, message, title, messageType);
     }
 
+    /**
+     * Clears all input fields in the student form. Resets each field's value to
+     * an empty string.
+     */
     private void clearStudentForm() {
         txtFldLmuId.setText("");
         txtFldFullName.setText("");
@@ -809,6 +853,13 @@ public class CollegeApp extends javax.swing.JFrame {
         txtFldAge.setText("");
     }
 
+    /**
+     * Checks whether a student with the same LMU ID already exists in the
+     * student list.
+     *
+     * @param student the StudentModel object to check for duplicates
+     * @return true if a duplicate is found, false otherwise
+     */
     private boolean checkDuplicateStudent(StudentModel student) {
         return studentList.stream()
                 .anyMatch(existingStudent
@@ -849,7 +900,6 @@ public class CollegeApp extends javax.swing.JFrame {
         });
 
         app.startProgress();
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
