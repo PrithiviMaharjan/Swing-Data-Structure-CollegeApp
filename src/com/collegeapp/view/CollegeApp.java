@@ -724,16 +724,27 @@ public class CollegeApp extends javax.swing.JFrame {
         }
 
         if (isValid) {
-            studentList.add(new StudentModel(
+            // Create a StudentModel instance
+            StudentModel newStudent = new StudentModel(
                     Integer.parseInt(txtFldLmuId.getText().trim()),
                     txtFldFullName.getText().trim(),
                     txtFldProgram.getText().trim(),
                     txtFldContact.getText().trim(),
                     Short.parseShort(txtFldAge.getText().trim())
-            ));
-            showDialogBox("Student added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            loadListToTable();
-            clearStudentForm();
+            );
+
+            // Check for duplicate LMU ID
+            if (checkDuplicateStudent(newStudent)) {
+                txtFldLmuId.setBorder(createTitledBorder(errorColor, "LMU ID"));
+                showDialogBox("LMU ID already exists.", "Duplicate Entry", JOptionPane.WARNING_MESSAGE);
+            } else {
+                // Add the student if no duplicate is found
+                studentList.add(newStudent);
+                clearStudentForm();
+                loadListToTable();
+                txtFldLmuId.setBorder(createTitledBorder(yellowColor, "LMU ID"));
+                showDialogBox("Student added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
