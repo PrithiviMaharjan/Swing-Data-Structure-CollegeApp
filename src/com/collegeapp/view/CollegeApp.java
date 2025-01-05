@@ -1,5 +1,6 @@
 package com.collegeapp.view;
 
+import com.collegeapp.controller.algorithms.BinarySearch;
 import com.collegeapp.controller.algorithms.SelectionSort;
 import com.collegeapp.model.StudentModel;
 import com.collegeapp.util.ValidationUtil;
@@ -22,7 +23,6 @@ public class CollegeApp extends javax.swing.JFrame {
     private final ValidationUtil validationUtil;
     private final Color errorColor = new Color(255, 51, 0);
     private final Color yellowColor = new Color(239, 192, 32);
-    private final SelectionSort selectionSort;
 
     /**
      * Creates new form CollegeApp
@@ -33,7 +33,6 @@ public class CollegeApp extends javax.swing.JFrame {
         initializeLayout(); // Set up CardLayout and add screens
         initializeData(); // Initialize student data and table
         startProgress(); // Show loading screen and initiate progress  
-        selectionSort = new SelectionSort();
     }
 
     /**
@@ -70,7 +69,9 @@ public class CollegeApp extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnSortLmuId = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtFldSearch = new javax.swing.JTextField();
         pnlAboutUs = new javax.swing.JPanel();
         pnlLoginScreen = new javax.swing.JPanel();
         pnlLoginLeft = new javax.swing.JPanel();
@@ -325,10 +326,17 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        btnSortLmuId.setText("sort by lmuid");
-        btnSortLmuId.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSortLmuIdActionPerformed(evt);
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -340,12 +348,19 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlStudentListLayout.createSequentialGroup()
+                        .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))
+                    .addGroup(pnlStudentListLayout.createSequentialGroup()
                         .addComponent(lblTblStudentTitle)
-                        .addGap(353, 353, 353)
-                        .addComponent(btnSortLmuId))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(309, 309, 309))))
         );
         pnlStudentListLayout.setVerticalGroup(
             pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +368,9 @@ public class CollegeApp extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(pnlStudentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTblStudentTitle)
-                    .addComponent(btnSortLmuId))
+                    .addComponent(jButton1)
+                    .addComponent(btnSearch)
+                    .addComponent(txtFldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spTblStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -611,8 +628,8 @@ public class CollegeApp extends javax.swing.JFrame {
         // Registering sample students
         registerStudent(new StudentModel(19057567, "Lekhnath Tandukar", "Multimedia", "9860898172", (short) 21));
         registerStudent(new StudentModel(19057566, "Subin Chhetri", "BIT. Computing", "9818928272", (short) 20));
-            registerStudent(new StudentModel(19057561, "Subin Lama", "BIT. Computing", "9818928272", (short) 20));
-}
+        registerStudent(new StudentModel(19057561, "Subin Lama", "BIT. Computing", "9818928272", (short) 20));
+    }
 
     /**
      * Simulates the loading progress using a SwingWorker thread. Updates a
@@ -775,11 +792,26 @@ public class CollegeApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnSortLmuIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortLmuIdActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        List<StudentModel> sortedList = selectionSort.sortByLmuId(studentList, false);
-        loadListToTable(sortedList);
-    }//GEN-LAST:event_btnSortLmuIdActionPerformed
+        SelectionSort selectionSort = new SelectionSort();
+        loadListToTable(selectionSort.sortByLmuId(studentList, false));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        //Step 1: sorted data
+        
+        SelectionSort selectionSort = new SelectionSort();
+        List<StudentModel> sortedList = selectionSort.sortByName(studentList, true);
+        BinarySearch search = new BinarySearch();
+        StudentModel searchedData = search.searchByName(txtFldSearch.getText().trim(), sortedList, 0, sortedList.size()-1);
+        if(searchedData!=null){
+            System.out.println(searchedData.getName());
+        }else{
+            System.out.println("Sorry");
+        }
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * Populates the JTable with the current list of student records. Clears
@@ -929,8 +961,9 @@ public class CollegeApp extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnSortLmuId;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblErrorMsgAge;
     private javax.swing.JLabel lblErrorMsgContact;
@@ -967,5 +1000,6 @@ public class CollegeApp extends javax.swing.JFrame {
     private javax.swing.JTextField txtFldLmuId;
     private javax.swing.JTextField txtFldLoginUsername;
     private javax.swing.JTextField txtFldProgram;
+    private javax.swing.JTextField txtFldSearch;
     // End of variables declaration//GEN-END:variables
 }
