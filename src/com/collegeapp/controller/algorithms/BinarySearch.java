@@ -16,13 +16,16 @@ public class BinarySearch {
     public StudentModel searchByName(String searchValue, List<StudentModel> studentList,
             int left, int right) {
 
+        // Base Case
         if (right < left) {
             return null;
         }
 
+        // mid value
         int mid = (left + right) / 2;
 
-        if (searchValue.toLowerCase().equals(studentList.get(mid).getName().toLowerCase())) {
+        // checks whether searchKey lies on mid point
+        if (searchValue.compareToIgnoreCase(studentList.get(mid).getName()) == 0) {
             return studentList.get(mid);
         } else if (searchValue.compareToIgnoreCase(studentList.get(mid).getName()) < 0) {
             return searchByName(searchValue, studentList, left, mid - 1);
